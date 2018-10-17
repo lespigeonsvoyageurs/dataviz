@@ -125,7 +125,7 @@ function bar_chart(element, property) {
     var width = +svg.attr("width") - margin.left - margin.right;
     var height = +svg.attr("height") - margin.top - margin.bottom;
     var g = svg.append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform","rotate(90)", "translate(" + margin.left + "," + margin.top + ")");
 
     var nested_data = d3.nest()
         .key(function (d) {
