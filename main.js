@@ -124,7 +124,8 @@ function bar_chart(element, property) {
     var svg = d3.select("#" + element).append("svg").attr("width", 300).attr("height", 300);
     var width = +svg.attr("width") - margin.left - margin.right;
     var height = +svg.attr("height") - margin.top - margin.bottom;
-    var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var g = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var nested_data = d3.nest()
         .key(function (d) {
@@ -231,10 +232,6 @@ $(function () {
             d.time = +d.time;
         });
         bar_chart("bcs", "status");
-        bar_chart("bcw", "who");
-        bar_chart("bcp", "priority");
-        bar_chart("bct", "time");
-        treemap("status");
 
     });
 
