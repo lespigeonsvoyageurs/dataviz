@@ -5,9 +5,7 @@
         margin: 15px;
         background-color: #F1F3F3
     }
-    .bar {
-        fill: #6F257F;
-    }
+
     .axis path,
     .axis line {
         fill: none;
@@ -15,9 +13,11 @@
         stroke-width: 1px;
         shape-rendering: crispEdges;
     }
+
     .x path {
         display: none;
     }
+
     .toolTip {
         position: absolute;
         display: none;
@@ -29,54 +29,103 @@
         text-align: center;
     }
 </style>
-<svg width="960" height="500"></svg>
+
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
-    var svg = d3.select("svg"),
-        margin = {top: 20, right: 20, bottom: 30, left: 80},
-        width = +svg.attr("width") - margin.left - margin.right,
-        height = +svg.attr("height") - margin.top - margin.bottom;
 
-    var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+    var data;
+    var selected_month = 1;
+    var selected_price_range = "1015";
 
-    var x = d3.scaleLinear().range([0, width]);
-    var y = d3.scaleBand().range([height, 0]);
+    function draw_top_chart() {
 
-    var g = svg.append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        var svg = d3.select("body").append("svg").attr("width", 800).attr("height", 200),
+            margin = {top: 20, right: 20, bottom: 30, left: 80},
+            width = +svg.attr("width") - margin.left - margin.right,
+            height = +svg.attr("height") - margin.top - margin.bottom;
 
-    d3.json("data.json", function(error, data) {
-        if (error) throw error;
+        var tooltip = d3.select("body").append("div").attr("class", "toolTip");
 
-        data.sort(function(a, b) { return a.value - b.value; });
+        var x = d3.scaleLinear().range([0, width]);
+        var y = d3.scaleBand().range([height, 0]);
+        var z = d3.scaleOrdinal(d3.schemeCategory10);
 
-        x.domain([0, d3.max(data, function(d) { return d.value; })]);
-        y.domain(data.map(function(d) { return d.area; })).padding(0.1);
+        var g = svg.append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        var fdata = data.filter(function (d) {
+            return d.mois === selected_month;
+        });
+        console.log(fdata);
+        var property = "logements_" + selected_price_range;
+
+        x.domain([0, d3.max(fdata, function (d) {
+            return d[property];
+        })]);
+        y.domain(fdata.map(function (d) {
+            return d.ville;
+        })).padding(0.1);
 
         g.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x).ticks(5).tickFormat(function(d) { return parseInt(d / 1000); }).tickSizeInner([-height]));
+            /*.call(d3.axisBottom(x).ticks(5).tickFormat(function (d) {
+                return parseInt(d / 1000);
+            }).tickSizeInner([-height]));*/
+            .call(d3.axisBottom(x).ticks(5));
 
-        g.append("g")
+        /*g.append("g")
             .attr("class", "y axis")
-            .call(d3.axisLeft(y));
+            .call(d3.axisLeft(y));*/
 
-        g.selectAll(".bar")
-            .data(data)
-            .enter().append("rect")
+        var groups = g.selectAll(".gr")
+            .data(fdata)
+            .enter().append("g")
+            .attr("class", "gr")
+            .attr("transform", function (d) {
+                return "translate(0," + y(d.ville) + ")"
+            });
+
+        groups.append("rect")
             .attr("class", "bar")
             .attr("x", 0)
             .attr("height", y.bandwidth())
-            .attr("y", function(d) { return y(d.area); })
-            .attr("width", function(d) { return x(d.value); })
-            .on("mousemove", function(d){
+            .attr("y", 0)
+            .attr("width", function (d) {
+                return x(d[property]);
+            })
+            .attr("fill", function (d) {
+                return z(d.country)
+            })
+            .on("mousemove", function (d) {
                 tooltip
                     .style("left", d3.event.pageX - 50 + "px")
                     .style("top", d3.event.pageY - 70 + "px")
                     .style("display", "inline-block")
-                    .html((d.area) + "<br>" + "£" + (d.value));
+                    .html((d[property]) + "<br>" + "logements");
             })
-            .on("mouseout", function(d){ tooltip.style("display", "none");});
+            .on("mouseout", function (d) {
+                tooltip.style("display", "none");
+            });
+
+        groups.append("text")
+            .attr("dx", 7)
+            .attr("dy", 30)
+            .text(function (d) {
+                return d.ville;
+            })
+    }
+
+    d3.json("data.json", function (error, d) {
+        if (error) throw error;
+
+        data = d;
+        data.sort(function (a, b) {
+            return a.logements - b.logements;
+        });
+
+        console.log(data);
+        draw_top_chart();
+
     });
 </script>
