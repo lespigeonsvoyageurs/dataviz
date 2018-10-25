@@ -1,8 +1,6 @@
 [
-  {"area": "central ", "value": 18000},
-  {"area": "Riverside ", "value": 17000},
-  {"area": "Picton ", "value": 80000},
-  {"area": "Everton ", "value": 55000},
-  {"area": "Kensington ", "value": 100000},
-  {"area": "Kirkdale", "value": 50000}
+  {"country": "Albanie", "ville": "Tirana", "logements_015": 18, "logements_1630": 10, "logements_3150": 0, "mois": 1},
+  {"country": "Albanie", "ville": "Tirana", "logements_015": 10, "logements_1630": 15, "logements_3150": 8, "mois": 2},
+  {"country": "Allemagne", "ville": "Berlin", "logements_015": 5, "logements_1630": 5, "logements_3150": 12, "mois": 1},
+  {"country": "Allemagne", "ville": "Berlin", "logements_015": 0, "logements_1630": 30, "logements_3150": 17, "mois": 2}
 ]
