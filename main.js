@@ -1,11 +1,12 @@
 var data;
 var selected_month = 1;
-var selected_price_range = "015";
+var selected_price_range = "115";
 
 
-function draw_top_chart() {
+function draw_top_chart(element) {
 
-    var svg = d3.select("body").append("svg").attr("width", 800).attr("height", 200),
+    $("#" + element).html("");
+    var svg = d3.select("#"+element).append("svg").attr("width", 800).attr("height", 200),
         margin = {top: 20, right: 20, bottom: 30, left: 80},
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height") - margin.top - margin.bottom;
@@ -18,7 +19,6 @@ function draw_top_chart() {
 
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
     var fdata = data.filter(function (d) {
         return d.mois === selected_month;
     });
@@ -76,7 +76,7 @@ function draw_top_chart() {
 
     groups.append("text")
         .attr("dx", 30)
-        .attr("dy", 35)
+        .attr("dy", 25)
         .text(function (d) {
             return d.ville;
         })
@@ -91,7 +91,18 @@ d3.json("data.json", function (error, d) {
     });
 
     console.log(data);
-    draw_top_chart();
+    draw_top_chart("chart");
 
+    $(".mon_btn").click(function(e){
+        selected_month = +$(this).attr("id").replace("btn-","");
+        console.log(selected_month);
+        draw_top_chart("chart");
+    });
+
+    $(".prix_btn").click(function(e){
+        selected_price_range = +$(this).attr("id").replace("btn-","");
+        console.log(selected_price_range);
+        draw_top_chart("chart");
+    });
 });
 

@@ -16,7 +16,7 @@ main {
 .axis text{
     font-family: "Adobe Caslon Pro";
     font-size: 15px;
-    fill: #21dadd;
+    fill: #010b0f;
 }
 
 .axis line{
@@ -61,4 +61,34 @@ footer {
 /* Add a background color on hover */
 .btn-group button:hover {
     background-color: #3e8e41;
+}
+
+body {
+
+    margin: 15px;
+    background-color: #F1F3F3
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #D4D8DA;
+    stroke-width: 1px;
+    shape-rendering: crispEdges;
+}
+
+.x path {
+    display: none;
+}
+
+.toolTip {
+    position: absolute;
+    display: none;
+    min-width: 80px;
+    border-radius: 10px;
+    height: auto;
+    background: none repeat scroll 0 0 #ffffff;
+    border: 1px solid #0f95bb;
+    padding: 14px;
+    text-align: center;
 }
