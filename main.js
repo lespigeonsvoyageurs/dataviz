@@ -3,10 +3,13 @@ var selected_month = 1;
 var selected_price_range = "115";
 
 
+
+
 function draw_top_chart(element) {
 
+    var fdata;
     $("#" + element).html("");
-    var svg = d3.select("#"+element).append("svg").attr("width", 800).attr("height", 200),
+    var svg = d3.select("#" + element).append("svg").attr("width", 800).attr("height", 200),
         margin = {top: 20, right: 20, bottom: 30, left: 80},
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height") - margin.top - margin.bottom;
@@ -19,9 +22,10 @@ function draw_top_chart(element) {
 
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    var fdata = data.filter(function (d) {
-        return d.mois === selected_month;
+    fdata = data.filter(function (d) {
+        return d.Mois === selected_month;
     });
+
     console.log(fdata);
     var property = "logements_" + selected_price_range;
 
@@ -29,7 +33,7 @@ function draw_top_chart(element) {
         return d[property];
     })]);
     y.domain(fdata.map(function (d) {
-        return d.ville;
+        return d.Ville;
     })).padding(0.1);
 
     g.append("g")
@@ -49,7 +53,7 @@ function draw_top_chart(element) {
         .enter().append("g")
         .attr("class", "gr")
         .attr("transform", function (d) {
-            return "translate(0," + y(d.ville) + ")"
+            return "translate(0," + y(d.Ville) + ")"
         });
 
     groups.append("rect")
@@ -61,7 +65,7 @@ function draw_top_chart(element) {
             return x(d[property]);
         })
         .attr("fill", function (d) {
-            return z(d.country)
+            return z(d.Pays)
         })
         .on("mousemove", function (d) {
             tooltip
@@ -78,31 +82,34 @@ function draw_top_chart(element) {
         .attr("dx", 30)
         .attr("dy", 25)
         .text(function (d) {
-            return d.ville;
+            return d.Ville;
         })
 }
 
-d3.json("data.json", function (error, d) {
-    if (error) throw error;
+var URL = "https://docs.google.com/spreadsheets/d/16Lqk3AiFAMLxjlRmRBQc4KgaOBFScnTbNVyPag0yQOU";
+URL += "/pub?single=true&output=csv";
 
+d3.csv(URL, function (d) {
     data = d;
-    data.sort(function (a, b) {
-        return a.logements - b.logements;
-    });
 
+    data.forEach(function(d){
+       d.Mois = +d.Mois;
+       d.logements_115 = +d.logements_115;
+        d.logements_1630 = +d.logements_1630;
+        d.logements_3150 = +d.logements_3150;
+    });
     console.log(data);
     draw_top_chart("chart");
 
-    $(".mon_btn").click(function(e){
-        selected_month = +$(this).attr("id").replace("btn-","");
+    $(".mon_btn").click(function (e) {
+        selected_month = +$(this).attr("id").replace("btn-", "");
         console.log(selected_month);
         draw_top_chart("chart");
     });
 
-    $(".prix_btn").click(function(e){
-        selected_price_range = +$(this).attr("id").replace("btn-","");
+    $(".prix_btn").click(function (e) {
+        selected_price_range = +$(this).attr("id").replace("btn-", "");
         console.log(selected_price_range);
         draw_top_chart("chart");
     });
 });
-
