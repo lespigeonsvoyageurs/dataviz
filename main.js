@@ -20,14 +20,18 @@ function draw_top_chart(element) {
     var y = d3.scaleBand().range([height, 0]);
     var z = d3.scaleOrdinal(d3.schemeCategory10);
 
+    var property = "logements_" + selected_price_range;
+
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     fdata = data.filter(function (d) {
         return d.Mois === selected_month;
     });
+    fdata = fdata.sort(function(a,b){
+        return d3.ascending(+a[property],+b[property]);
+    });
 
     console.log(fdata);
-    var property = "logements_" + selected_price_range;
 
     x.domain([0, d3.max(fdata, function (d) {
         return d[property];
@@ -91,7 +95,6 @@ URL += "/pub?single=true&output=csv";
 
 d3.csv(URL, function (d) {
     data = d;
-
     data.forEach(function(d){
        d.Mois = +d.Mois;
        d.logements_115 = +d.logements_115;
