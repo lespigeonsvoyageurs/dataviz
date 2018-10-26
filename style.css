@@ -92,3 +92,14 @@ body {
     padding: 14px;
     text-align: center;
 }
+
+footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #e6e6e6;
+    color: black;
+    text-align: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
