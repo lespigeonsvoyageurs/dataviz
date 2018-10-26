@@ -18,7 +18,7 @@ function draw_top_chart(element) {
 
     var x = d3.scaleLinear().range([0, width]);
     var y = d3.scaleBand().range([height, 0]);
-    var z = d3.scaleOrdinal(d3.schemeCategory10);
+    var z = d3.scaleOrdinal(['#7C1354','#B2190E','#FF9F1C','#7CAD2E','#21DADD', '#ba778b','#b2651e','#fbff80','#63ad72','#478add']);
 
     var property = "logements_" + selected_price_range;
 
@@ -85,7 +85,8 @@ function draw_top_chart(element) {
     groups.append("text")
         .attr("dx", 30)
         .attr("dy", 25)
-        .text(function (d) {
+
+.text(function (d) {
             return d.Ville;
         })
 }
