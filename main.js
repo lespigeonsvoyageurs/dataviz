@@ -110,6 +110,7 @@ d3.csv(URL, function (d) {
         selected_month = +$(this).attr("id").replace("btn-", "");
         console.log(selected_month);
         draw_top_chart("chart");
+
     });
 
     $(".prix_btn").click(function (e) {

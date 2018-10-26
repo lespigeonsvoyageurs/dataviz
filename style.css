@@ -75,10 +75,12 @@ h1{
     background: #ffffff;
     border-radius: 6px;
 
+
 }
 .prix_btn{
     background: #ffffff;
     border-radius: 6px;
+
 }
 
 #chart{
@@ -87,8 +89,10 @@ h1{
 .mon_btn:focus{
     background-color: #039fcc;
     transform: translateY(4px);
+    outline: none;
 }
 .prix_btn:focus{
     background-color: #039fcc;
     transform: translateY(4px);
+    outline: none;
 }
