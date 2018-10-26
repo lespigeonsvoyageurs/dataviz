@@ -85,6 +85,7 @@ function draw_top_chart(element) {
     groups.append("text")
         .attr("dx", 30)
         .attr("dy", 25)
+        .style('fill', 'white')
 
 .text(function (d) {
             return d.Ville;
