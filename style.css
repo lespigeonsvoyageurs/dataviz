@@ -27,7 +27,6 @@ main {
     stroke: #7cad2e;
 }
 
-
 body {
 
     margin: 15px;
@@ -74,13 +73,22 @@ h1{
 }
 .mon_btn{
     background: #ffffff;
-    border-radius: 3px;
+    border-radius: 6px;
+
 }
 .prix_btn{
     background: #ffffff;
-    border-radius: 3px;
+    border-radius: 6px;
 }
 
 #chart{
     margin-left: 16rem ;
+}
+.mon_btn:focus{
+    background-color: #039fcc;
+    transform: translateY(4px);
+}
+.prix_btn:focus{
+    background-color: #039fcc;
+    transform: translateY(4px);
 }
