@@ -38,30 +38,6 @@ footer {
     padding-top: 5px;
     padding-bottom: 5px;
 }
-.btn-group-prix button {
-    background-color: #4CAF50; /* Green background */
-    border: 1px solid green; /* Green border */
-    color: white; /* White text */
-    padding: 10px 24px; /* Some padding */
-    cursor: pointer; /* Pointer/hand icon */
-    float: left; /* Float the buttons side by side */
-}
-
-.btn-group button:not(:last-child) {
-    border-right: none; /* Prevent double borders */
-}
-
-/* Clear floats (clearfix hack) */
-.btn-group:after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-/* Add a background color on hover */
-.btn-group button:hover {
-    background-color: #3e8e41;
-}
 
 body {
 
@@ -107,3 +83,24 @@ IMG.displayed {
     display: block;
     margin-left: auto;
     margin-right: auto }
+
+h1{
+    font-family: "Open Sans Semibold";
+    text-align: center;
+}
+
+.btn-group{
+    text-align: center;
+}
+.mon_btn{
+    background: #ffffff;
+    border-radius: 3px;
+}
+.prix_btn{
+    background: #ffffff;
+    border-radius: 3px;
+}
+
+#chart{
+    margin-left: 16rem ;
+}
