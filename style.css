@@ -103,3 +103,7 @@ footer {
     padding-top: 25px;
     padding-bottom: 25px;
 }
+IMG.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto }
