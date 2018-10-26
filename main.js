@@ -84,7 +84,7 @@ function draw_top_chart(element) {
 
     groups.append("text")
         .attr("dx", 30)
-        .attr("dy", 25)
+        .attr("dy", 18)
         .style('fill', 'white')
 
 .text(function (d) {
@@ -110,7 +110,6 @@ d3.csv(URL, function (d) {
         selected_month = +$(this).attr("id").replace("btn-", "");
         console.log(selected_month);
         draw_top_chart("chart");
-
     });
 
     $(".prix_btn").click(function (e) {
