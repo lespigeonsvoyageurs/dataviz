@@ -89,7 +89,7 @@ function draw_top_chart(element) {
     groups.append("text")
         .attr("dx", 30)
         .attr("dy", 18)
-        .style('fill', 'white')
+        .style('fill', 'black')
 
         .text(function (d) {
             return d.Ville;
@@ -111,12 +111,13 @@ function draw_country_chart(element) {
     var y = d3.scaleBand().range([height, 0]);
     var z = d3.scaleOrdinal(['#7C1354','#B2190E','#FF9F1C','#7CAD2E','#21DADD', '#ba778b','#b2651e','#fbff80','#63ad72','#478add']);
 
-    var property = "logements_" + selected_price_range;
+    var property = "value";
 
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    fdata = data.filter(function (d) {
-        return d.Mois === selected_month;
+
+    fdata = nested_data.filter(function(d){
+        return d.value > 10;
     });
     fdata = fdata.sort(function(a,b){
         return d3.ascending(+a[property],+b[property]);
@@ -128,7 +129,7 @@ function draw_country_chart(element) {
         return d[property];
     })]);
     y.domain(fdata.map(function (d) {
-        return d.Pays;
+        return d.key;
     })).padding(0.1);
 
     g.append("g")
@@ -149,7 +150,7 @@ function draw_country_chart(element) {
         .enter().append("g")
         .attr("class", "gr")
         .attr("transform", function (d) {
-            return "translate(0," + y(d.Pays) + ")"
+            return "translate(0," + y(d.key) + ")"
         });
 
     groups.append("rect")
@@ -161,26 +162,16 @@ function draw_country_chart(element) {
             return x(d[property]);
         })
         .attr("fill", function (d) {
-            return z(d.Pays)
-        })
-        .on("mousemove", function (d) {
-            tooltip
-                .style("left", d3.event.pageX - 50 + "px")
-                .style("top", d3.event.pageY - 70 + "px")
-                .style("display", "inline-block")
-                .html((d[property]) + "<br>" + "logements");
-        })
-        .on("mouseout", function (d) {
-            tooltip.style("display", "none");
+            return z(d.key)
         });
 
     groups.append("text")
         .attr("dx", 30)
         .attr("dy", 18)
-        .style('fill', 'white')
+        .style('fill', 'black')
 
         .text(function (d) {
-            return d.Pays;
+            return d.key;
         })
 }
 
@@ -196,6 +187,22 @@ d3.csv(URL, function (d) {
         d.logements_3150 = +d.logements_3150;
     });
     console.log(data);
+
+    // Compute data for 2nd chart
+    nested_data = d3.nest()
+        .key(function (d) {
+            return d.Pays;
+        })
+        .rollup(function(d){
+            return d3.sum(d, function(e){
+                return e.logements_115 + e.logements_3150 + e.logements_1630 / 12;
+
+            })
+        }).entries(data);
+
+    console.log("NESTED DATA");
+    console.log(nested_data);
+
     draw_top_chart("chart");
     draw_country_chart("country_chart");
 
