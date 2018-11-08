@@ -209,6 +209,9 @@ d3.csv(URL, function (d) {
 
     });
 
+    $("#btn-11").toggleClass("active");
+    $("#btn-115").toggleClass("active");
+
     $(".prix_btn").click(function () {
         $(".prix_btn").removeClass("active");
         $(this).toggleClass("active");
