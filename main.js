@@ -1,5 +1,9 @@
+
+var months    = ['Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet','Aout','September','Octobre','Novembre','Decembre'];
+var now       = new Date();
+var month_name = months[now.getMonth()]; //
 var data;
-var selected_month = 1;
+var selected_month = now.getMonth() + 1;
 var selected_price_range = "115";
 
 
