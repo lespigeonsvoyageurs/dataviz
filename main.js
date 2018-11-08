@@ -23,7 +23,7 @@ function draw_top_chart(element) {
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     fdata = data.filter(function (d) {
-        return d.Mois === selected_month;
+        return d.Mois === selected_month && d[property] > 0;
     });
     fdata = fdata.sort(function (a, b) {
         return d3.ascending(+a[property], +b[property]);
@@ -71,8 +71,8 @@ function draw_top_chart(element) {
         })
         .on("mousemove", function (d) {
             tooltip
-                .style("left", d3.event.pageX  + "px")
-                .style("top", d3.event.pageY  + "px")
+                .style("left", d3.event.pageX + "px")
+                .style("top", d3.event.pageY + "px")
                 .style("display", "inline-block")
                 .html((d[property]) + "<br>" + "logements");
         })
@@ -80,9 +80,22 @@ function draw_top_chart(element) {
             tooltip.style("display", "none");
         });
 
+    groups.append("image")
+        .attr("x", 5)
+        .attr("y", 10)
+        .attr("width", 30)
+        .attr("height", 25)
+        .attr('xlink:href', function (d) {
+            if (d.country_code !== undefined) {
+                return "flags/flags/4x3/" + d.country_code + ".svg";
+            } else {
+                return "flags/flags/4x3/fr.svg";
+            }
+        });
+
     groups.append("text")
-        .attr("dx", 30)
-        .attr("dy", 18)
+        .attr("dx", 43)
+        .attr("dy", 22)
         .style('fill', 'black')
 
         .text(function (d) {
@@ -158,8 +171,21 @@ function draw_country_chart(element) {
             return d.value.couleur;
         });
 
+    groups.append("image")
+        .attr("x", 5)
+        .attr("y", 10)
+        .attr("width", 30)
+        .attr("height", 22)
+        .attr('xlink:href', function (d) {
+            if (d.country_code !== undefined) {
+                return "flags/flags/4x3/" + d.country_code + ".svg";
+            } else {
+                return "flags/flags/4x3/fr.svg";
+            }
+        });
+
     groups.append("text")
-        .attr("dx", 30)
+        .attr("dx", 43)
         .attr("dy", 25)
         .style('fill', 'black')
 
@@ -168,46 +194,46 @@ function draw_country_chart(element) {
         })
 }
 
-var URL = "https://docs.google.com/spreadsheets/d/16Lqk3AiFAMLxjlRmRBQc4KgaOBFScnTbNVyPag0yQOU";
-URL += "/pub?single=true&output=csv";
+// Wait for juqery to be loaded !
+$(function () {
+    d3.csv(URL, function (d) {
+        data = d;
+        data.forEach(function (d) {
+            d.Mois = +d.Mois;
+            d.logements_115 = +d.logements_115;
+            d.logements_1630 = +d.logements_1630;
+            d.logements_3150 = +d.logements_3150;
+        });
+        console.log(data);
 
-d3.csv(URL, function (d) {
-    data = d;
-    data.forEach(function (d) {
-        d.Mois = +d.Mois;
-        d.logements_115 = +d.logements_115;
-        d.logements_1630 = +d.logements_1630;
-        d.logements_3150 = +d.logements_3150;
-    });
-    console.log(data);
+        // Compute data for 2nd chart
+        nested_data = d3.nest()
+            .key(function (d) {
+                return d.Pays;
+            })
+            .rollup(function (d) {
+                return {
+                    "total": d3.sum(d, function (e) {
+                        return e.logements_115 + e.logements_3150 + e.logements_1630 / 12;
 
-    // Compute data for 2nd chart
-    nested_data = d3.nest()
-        .key(function (d) {
-            return d.Pays;
-        })
-        .rollup(function (d) {
-            return {
-                "total": d3.sum(d, function (e) {
-                return e.logements_115 + e.logements_3150 + e.logements_1630 / 12;
+                    }), "couleur": d[0].Couleur
+                }
+            }).entries(data);
 
-            }), "couleur": d[0].Couleur}
-        }).entries(data);
+        console.log("NESTED DATA");
+        console.log(nested_data);
 
-    console.log("NESTED DATA");
-    console.log(nested_data);
-
-    draw_top_chart("chart");
-    draw_country_chart("country_chart");
-
-    $(".mon_btn").click(function () {
-        $(".mon_btn").removeClass("active");
-        $(this).toggleClass("active");
-        selected_month = +$(this).attr("id").replace("btn-", "");
-        console.log(selected_month);
         draw_top_chart("chart");
+        draw_country_chart("country_chart");
 
-    });
+        $(".mon_btn").click(function () {
+            $(".mon_btn").removeClass("active");
+            $(this).toggleClass("active");
+            selected_month = +$(this).attr("id").replace("btn-", "");
+            console.log(selected_month);
+            draw_top_chart("chart");
+
+        });
 
     $("#btn-11").toggleClass("active");
     $("#btn-115").toggleClass("active");
@@ -219,5 +245,10 @@ d3.csv(URL, function (d) {
         console.log(selected_price_range);
         draw_top_chart("chart");
 
+        });
     });
 });
+var URL = "https://docs.google.com/spreadsheets/d/16Lqk3AiFAMLxjlRmRBQc4KgaOBFScnTbNVyPag0yQOU";
+URL += "/pub?single=true&output=csv";
+
+
