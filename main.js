@@ -1,16 +1,12 @@
-
-var months    = ['Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet','Aout','September','Octobre','Novembre','Decembre'];
-var now       = new Date();
+var months = ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'September', 'Octobre', 'Novembre', 'Decembre'];
+var now = new Date();
 var month_name = months[now.getMonth()]; //
 var data;
 var selected_month = now.getMonth() + 1;
 var selected_price_range = "115";
 
 
-
-
 function draw_top_chart(element) {
-
     var fdata;
     $("#" + element).html("");
     var svg = d3.select("#" + element).append("svg").attr("width", 500).attr("height", 200),
@@ -22,7 +18,6 @@ function draw_top_chart(element) {
 
     var x = d3.scaleLinear().range([0, width]);
     var y = d3.scaleBand().range([height, 0]);
-    var z = d3.scaleOrdinal(['#7C1354','#B2190E','#FF9F1C','#7CAD2E','#21DADD', '#ba778b','#b2651e','#fbff80','#63ad72','#478add']);
 
     var property = "logements_" + selected_price_range;
 
@@ -31,8 +26,8 @@ function draw_top_chart(element) {
     fdata = data.filter(function (d) {
         return d.Mois === selected_month;
     });
-    fdata = fdata.sort(function(a,b){
-        return d3.ascending(+a[property],+b[property]);
+    fdata = fdata.sort(function (a, b) {
+        return d3.ascending(+a[property], +b[property]);
     });
 
     console.log(fdata);
@@ -73,7 +68,7 @@ function draw_top_chart(element) {
             return x(d[property]);
         })
         .attr("fill", function (d) {
-            return z(d.Pays)
+            return d.Couleur;
         })
         .on("mousemove", function (d) {
             tooltip
@@ -109,24 +104,22 @@ function draw_country_chart(element) {
 
     var x = d3.scaleLinear().range([0, width]);
     var y = d3.scaleBand().range([height, 0]);
-    var z = d3.scaleOrdinal(['#7C1354','#B2190E','#FF9F1C','#7CAD2E','#21DADD', '#ba778b','#b2651e','#fbff80','#63ad72','#478add']);
-
-    var property = "value";
 
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    fdata = nested_data.filter(function(d){
-        return d.value > 10;
+    fdata = nested_data.filter(function (d) {
+        return d.value.total > 10;
     });
-    fdata = fdata.sort(function(a,b){
-        return d3.ascending(+a[property],+b[property]);
+    fdata = fdata.sort(function (a, b) {
+        return d3.ascending(+a.value.total, +b.value.total);
     });
 
     console.log(fdata);
 
     x.domain([0, d3.max(fdata, function (d) {
-        return d[property];
+        return d.value.total;
+
     })]);
     y.domain(fdata.map(function (d) {
         return d.key;
@@ -159,10 +152,11 @@ function draw_country_chart(element) {
         .attr("height", y.bandwidth())
         .attr("y", 0)
         .attr("width", function (d) {
-            return x(d[property]);
+            return x(d.value.total);
         })
         .attr("fill", function (d) {
-            return z(d.key)
+            console.log(d);
+            return d.value.couleur;
         });
 
     groups.append("text")
@@ -180,9 +174,9 @@ URL += "/pub?single=true&output=csv";
 
 d3.csv(URL, function (d) {
     data = d;
-    data.forEach(function(d){
-       d.Mois = +d.Mois;
-       d.logements_115 = +d.logements_115;
+    data.forEach(function (d) {
+        d.Mois = +d.Mois;
+        d.logements_115 = +d.logements_115;
         d.logements_1630 = +d.logements_1630;
         d.logements_3150 = +d.logements_3150;
     });
@@ -193,11 +187,12 @@ d3.csv(URL, function (d) {
         .key(function (d) {
             return d.Pays;
         })
-        .rollup(function(d){
-            return d3.sum(d, function(e){
+        .rollup(function (d) {
+            return {
+                "total": d3.sum(d, function (e) {
                 return e.logements_115 + e.logements_3150 + e.logements_1630 / 12;
 
-            })
+            }), "couleur": d[0].Couleur}
         }).entries(data);
 
     console.log("NESTED DATA");
