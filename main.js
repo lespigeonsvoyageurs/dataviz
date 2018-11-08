@@ -9,7 +9,7 @@ var selected_price_range = "115";
 function draw_top_chart(element) {
     var fdata;
     $("#" + element).html("");
-    var svg = d3.select("#" + element).append("svg").attr("width", 500).attr("height", 200),
+    var svg = d3.select("#" + element).append("svg").attr("width", 500).attr("height", 600),
         margin = {top: 20, right: 20, bottom: 30, left: 80},
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height") - margin.top - margin.bottom;
@@ -72,8 +72,8 @@ function draw_top_chart(element) {
         })
         .on("mousemove", function (d) {
             tooltip
-                .style("left", d3.event.pageX - 50 + "px")
-                .style("top", d3.event.pageY - 70 + "px")
+                .style("left", d3.event.pageX  + "px")
+                .style("top", d3.event.pageY  + "px")
                 .style("display", "inline-block")
                 .html((d[property]) + "<br>" + "logements");
         })
@@ -84,7 +84,7 @@ function draw_top_chart(element) {
     groups.append("text")
         .attr("dx", 30)
         .attr("dy", 18)
-        .style('fill', 'black')
+        .style('fill', 'white')
 
         .text(function (d) {
             return d.Ville;
@@ -95,7 +95,7 @@ function draw_country_chart(element) {
 
     var fdata;
     $("#" + element).html("");
-    var svg = d3.select("#" + element).append("svg").attr("width", 500).attr("height", 200),
+    var svg = d3.select("#" + element).append("svg").attr("width", 500).attr("height", 500),
         margin = {top: 20, right: 20, bottom: 30, left: 80},
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height") - margin.top - margin.bottom;
@@ -161,8 +161,8 @@ function draw_country_chart(element) {
 
     groups.append("text")
         .attr("dx", 30)
-        .attr("dy", 18)
-        .style('fill', 'black')
+        .attr("dy", 25)
+        .style('fill', 'white')
 
         .text(function (d) {
             return d.key;
