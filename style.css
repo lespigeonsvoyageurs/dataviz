@@ -74,18 +74,18 @@ h1{
 .mon_btn{
     background: #ffffff;
     border-radius: 6px;
+    text-align: center;
 
 
 }
 .prix_btn{
     background: #ffffff;
     border-radius: 6px;
+    text-align: center;
 
 }
 
-#chart{
-    margin-left: 16rem ;
-}
+
 .mon_btn:focus{
     background-color: #039fcc;
     transform: translateY(4px);
@@ -96,3 +96,8 @@ h1{
     transform: translateY(4px);
     outline: none;
 }
+h2{
+    margin-left:5rem ;
+}
+
+.btn
