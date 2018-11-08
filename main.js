@@ -84,7 +84,7 @@ function draw_top_chart(element) {
     groups.append("text")
         .attr("dx", 30)
         .attr("dy", 18)
-        .style('fill', 'white')
+        .style('fill', 'black')
 
         .text(function (d) {
             return d.Ville;
@@ -162,7 +162,7 @@ function draw_country_chart(element) {
     groups.append("text")
         .attr("dx", 30)
         .attr("dy", 25)
-        .style('fill', 'white')
+        .style('fill', 'black')
 
         .text(function (d) {
             return d.key;
