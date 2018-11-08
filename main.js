@@ -177,8 +177,8 @@ function draw_country_chart(element) {
         .attr("width", 30)
         .attr("height", 22)
         .attr('xlink:href', function (d) {
-            if (d.country_code !== undefined) {
-                return "flags/flags/4x3/" + d.country_code + ".svg";
+            if (d.value.countrycode !== undefined) {
+                return "flags/flags/4x3/" + d.value.countrycode + ".svg";
             } else {
                 return "flags/flags/4x3/fr.svg";
             }
@@ -216,7 +216,7 @@ $(function () {
                     "total": d3.sum(d, function (e) {
                         return e.logements_115 + e.logements_3150 + e.logements_1630 / 12;
 
-                    }), "couleur": d[0].Couleur
+                    }), "couleur": d[0].Couleur , "countrycode": d[0].country_code
                 }
             }).entries(data);
 
