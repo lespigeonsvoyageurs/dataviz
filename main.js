@@ -5,7 +5,6 @@ var data;
 var selected_month = now.getMonth() + 1;
 var selected_price_range = "115";
 
-
 function draw_top_chart(element) {
     var fdata;
     $("#" + element).html("");
@@ -201,15 +200,21 @@ d3.csv(URL, function (d) {
     draw_top_chart("chart");
     draw_country_chart("country_chart");
 
-    $(".mon_btn").click(function (e) {
+    $(".mon_btn").click(function () {
+        $(".mon_btn").removeClass("active");
+        $(this).toggleClass("active");
         selected_month = +$(this).attr("id").replace("btn-", "");
         console.log(selected_month);
         draw_top_chart("chart");
+
     });
 
-    $(".prix_btn").click(function (e) {
+    $(".prix_btn").click(function () {
+        $(".prix_btn").removeClass("active");
+        $(this).toggleClass("active");
         selected_price_range = +$(this).attr("id").replace("btn-", "");
         console.log(selected_price_range);
         draw_top_chart("chart");
+
     });
 });

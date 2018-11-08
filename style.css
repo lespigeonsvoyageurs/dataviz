@@ -86,16 +86,14 @@ h1{
 }
 
 
-.mon_btn:focus{
-    background-color: #039fcc;
-    transform: translateY(4px);
-    outline: none;
+.active, .mon_btn:hover {
+    background-color:#039fcc;
 }
-.prix_btn:focus{
-    background-color: #039fcc;
-    transform: translateY(4px);
-    outline: none;
+.active, .prix_btn:hover {
+    background-color:#039fcc;
 }
+
+
 h2{
     margin-left:5rem ;
 }
