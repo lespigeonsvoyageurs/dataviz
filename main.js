@@ -177,7 +177,7 @@ function draw_country_chart(element) {
         .attr("width", 30)
         .attr("height", 22)
         .attr('xlink:href', function (d) {
-            if (d.country_code !== undefined && d.country_code !== "") {
+            if (d.country_code !== undefined) {
                 return "flags/flags/4x3/" + d.country_code + ".svg";
             } else {
                 return "flags/flags/4x3/fr.svg";
