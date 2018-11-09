@@ -5,11 +5,13 @@ var data;
 var selected_month = now.getMonth() + 1;
 var selected_price_range = "115";
 var selected_country = "";
+var padding = 10;
+
 
 function draw_top_chart(element) {
     var fdata;
     $("#" + element).html("");
-    var svg = d3.select("#" + element).append("svg").attr("width", 500).attr("height", 800),
+    var svg = d3.select("#" + element).append("svg").attr("width", 500).attr("height", 1000),
         margin = {top: 20, right: 20, bottom: 30, left: 80},
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height") - margin.top - margin.bottom;
@@ -36,7 +38,7 @@ function draw_top_chart(element) {
     }));
 
     fdata = fdata.sort(function (a, b) {
-        return d3.ascending(+a[property], +b[property]);
+        return d3.descending(+a[property], +b[property]);
     });
 
 
@@ -49,7 +51,7 @@ function draw_top_chart(element) {
 
     g.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
+        .attr("transform", "translate(0,")
         /*.call(d3.axisBottom(x).ticks(5).tickFormat(function (d) {
             return parseInt(d / 1000);
         }).tickSizeInner([-height]));*/
@@ -63,15 +65,15 @@ function draw_top_chart(element) {
         .data(fdata)
         .enter().append("g")
         .attr("class", "gr")
-        .attr("transform", function (d) {
-            return "translate(0," + y(d.Ville) + ")"
+        .attr("transform", function (d, i) {
+            return "translate(0," + 45*(i) + ")"
         });
 
     groups.append("rect")
         .attr("class", "bar")
         .attr("x", 0)
-        .attr("height", y.bandwidth())
-        .attr("y", 0)
+        .attr("height", 40)
+        .attr("y", 30)
         .attr("width", function (d) {
             return x(d[property]);
         })
@@ -93,7 +95,7 @@ function draw_top_chart(element) {
         .attr("x", -50)
         .attr("y", 5)
         .attr("width", 30)
-        .attr("height", 25)
+        .attr("height", 90)
         .attr('xlink:href', function (d) {
             if (d.country_code !== undefined) {
                 return "flags/flags/4x3/" + d.country_code + ".svg";
@@ -104,7 +106,7 @@ function draw_top_chart(element) {
 
     groups.append("text")
         .attr("dx", 43)
-        .attr("dy", 22)
+        .attr("dy", 55)
         .style('fill', 'black')
 
         .text(function (d) {
