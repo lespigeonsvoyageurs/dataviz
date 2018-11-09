@@ -83,6 +83,7 @@ h1{
     border-radius: 6px;
     text-align: center;
 
+
 }
 
 
@@ -98,4 +99,10 @@ h2{
     margin-left:5rem ;
 }
 
-.btn
+.mois{
+    margin-left: 10rem;
+}
+
+.prix{
+    margin-left: 5rem;
+}

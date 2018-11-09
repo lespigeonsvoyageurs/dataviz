@@ -8,7 +8,7 @@ var selected_price_range = "115";
 function draw_top_chart(element) {
     var fdata;
     $("#" + element).html("");
-    var svg = d3.select("#" + element).append("svg").attr("width", 500).attr("height", 600),
+    var svg = d3.select("#" + element).append("svg").attr("width", 500).attr("height", 800),
         margin = {top: 20, right: 20, bottom: 30, left: 80},
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height") - margin.top - margin.bottom;
@@ -81,8 +81,8 @@ function draw_top_chart(element) {
         });
 
     groups.append("image")
-        .attr("x", 5)
-        .attr("y", 10)
+        .attr("x", -50)
+        .attr("y", 5)
         .attr("width", 30)
         .attr("height", 25)
         .attr('xlink:href', function (d) {
@@ -137,14 +137,7 @@ function draw_country_chart(element) {
         return d.key;
     })).padding(0.1);
 
-    g.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        /*.call(d3.axisBottom(x).ticks(5).tickFormat(function (d) {
-            return parseInt(d / 1000);
-        }).tickSizeInner([-height]));*/
-        .call(d3.axisBottom(x).ticks(5));
-
+    
     /*g.append("g")
         .attr("class", "y axis")
         .attr("class", "y axis")
@@ -172,7 +165,7 @@ function draw_country_chart(element) {
         });
 
     groups.append("image")
-        .attr("x", 5)
+        .attr("x", -50)
         .attr("y", 10)
         .attr("width", 30)
         .attr("height", 22)
