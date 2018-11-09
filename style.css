@@ -1,5 +1,6 @@
 body {
     padding-top: 1rem;
+    background-color: #f5f5f5;
 }
 
 main {
@@ -28,8 +29,6 @@ main {
 }
 
 body {
-
-    margin: 15px;
     background-color: #F1F3F3
 }
 
@@ -64,7 +63,8 @@ IMG.displayed {
     margin-right: auto }
 
 h1{
-    font-family: "Open Sans Semibold";
+    font-family:"Open Sans Light";
+    text-transform : uppercase;
     text-align: center;
 }
 
@@ -72,35 +72,56 @@ h1{
     text-align: center;
 }
 .mon_btn{
-    background: #ffffff;
+    background: rgba(1, 11, 15, 0.02);
     border-radius: 6px;
     text-align: center;
-
-
+    font-family:"Open Sans Light";
+    text-transform : uppercase;
 }
+
 .prix_btn{
-    background: #ffffff;
+    background: rgba(1, 11, 15, 0.02);
     border-radius: 6px;
     text-align: center;
+    font-family:"Open Sans Light";
+    text-transform : uppercase;
 
 
 }
 
+.btn_reset{
+    background: rgba(1, 11, 15, 0.02);
+    border-radius: 6px;
+    text-align: center;
+    font-family:"Open Sans Light";
+    text-transform : uppercase;
 
+}
 .active, .mon_btn:hover {
-    background-color:#039fcc;
+    background-color: rgba(3, 159, 204, 0.38);
 }
 .active, .prix_btn:hover {
-    background-color:#039fcc;
+    background-color: rgba(3, 159, 204, 0.38);
+}
+.btn_reset:hover {
+    background-color: rgba(3, 159, 204, 0.38);
 }
 
+.subtitle{
+    margin-left: 5rem;
+
+}
 
 h2{
     margin-left:5rem ;
+    margin-top: 3rem;
+    font-family:"Open Sans Light";
+    text-transform : uppercase;
 }
 
 .mois{
     margin-left: 10rem;
+
 }
 
 .prix{
@@ -110,3 +131,48 @@ h2{
 .country_bar {
     cursor: pointer;
 }
+
+.select{
+    color: #01090d;
+    border-radius: 6px;
+    font-family:"Open Sans Light";
+    text-transform : uppercase;
+
+}
+.axis path, .axis line {
+    fill: none;
+    stroke: #181a1b;
+    stroke-width: 1px;
+    shape-rendering: crispEdges;
+}
+
+.site-branding {
+    margin-top: -1rem;
+    text-align: center;
+    display: block;
+    clear: both;
+    top: 0;
+    left: 0;
+    background-color: #a0ced9;
+    padding: 0.617924em 0;
+    margin-bottom: 20px;
+
+}
+.navbar, .main-navigation ul.menu ul li a {
+    border-color: #d5d6d6;
+}
+.navbar, .navbar .main-navigation .sub-menu, .navbar .main-navigation .children {
+    background-color: rgba(247, 247, 247, 0);
+}
+@media (min-width: 64em){
+    .navbar {
+        border-bottom: 1px solid #efefef;
+        border-top: 1px solid #efefef;
+        border-color: #2b2b3d;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.05);
+    }
+    .navbar {
+        position: relative;
+        border-bottom: 0;
+        border-top: 1px solid #efefef;
+    }}
