@@ -113,6 +113,13 @@ h1{
     margin-left: 3rem;
 
 }
+.navbar, .main-navigation ul.menu ul li a {
+    border-color: #d5d6d6;
+}
+.navbar, .navbar .main-navigation .sub-menu, .navbar .main-navigation .children {
+    b-color: #f7f7f7;
+}
+
 
 h2{
     margin-left:5rem ;
