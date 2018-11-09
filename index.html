@@ -4,9 +4,52 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="flags/css/flag-icon.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
     <div class="site-branding">
         <span class="site-title"><a href="https://www.lespigeons-voyageurs.fr/" rel="home"><img class="setwood-logo" src="https://www.lespigeons-voyageurs.fr/wp-content/uploads/2018/10/banniere-lespigeonsvoyageurs.png" alt="Les Pigeons Voyageurs"></a></span>
         <p class="site-description"></p>
+    </div>
+
+    <div class="container">
+
+        <!-- Button to Open the Modal -->
+        <button type="button" class="ouvrir" data-toggle="modal" data-target="#myModal">
+           L'indice Dodo
+        </button>
+
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">A propos</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        Bienvenue sur la Data Visualisation des Pigeons Voyageurs !
+                        Vous retrouverez ici notre “indice dodo”.
+                        Vous allez me dire : “Mais quelle est cette sorcellerie ?”.
+                        Ce à quoi je vais répondre : “Eh bien c’est très simple. Il s’agit du nombre de logements disponibles sur le site Airbnb pour le premier week-end de chaque mois. Au niveau du prix, c’est le prix d’un logement pour 2 personnes par ville.”
+                    <br>Pour l'utiliser, séléctionnez une tranche de prix et un mois pour voir le nombre de logements disponibles. Vous pouvez également filtrer les villes en cliquant sur un pays.
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="fermer" data-dismiss="modal">Fermer</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
     <div class="navbar">        <nav id="site-navigation" class="main-navigation col-full" aria-label="Primary Navigation">
         <div class="btn-group">
