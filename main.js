@@ -51,11 +51,11 @@ function draw_top_chart(element) {
 
     g.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(0,")
+        .attr("transform", "translate(0,"  + height + " ")
         /*.call(d3.axisBottom(x).ticks(5).tickFormat(function (d) {
             return parseInt(d / 1000);
         }).tickSizeInner([-height]));*/
-        .call(d3.axisBottom(x).ticks(5));
+        //.call(d3.axisBottom(x).ticks(1));
 
     /*g.append("g")
         .attr("class", "y axis")
@@ -73,7 +73,7 @@ function draw_top_chart(element) {
         .attr("class", "bar")
         .attr("x", 0)
         .attr("height", 40)
-        .attr("y", 30)
+        .attr("y", 0)
         .attr("width", function (d) {
             return x(d[property]);
         })
@@ -95,7 +95,7 @@ function draw_top_chart(element) {
         .attr("x", -50)
         .attr("y", 5)
         .attr("width", 30)
-        .attr("height", 90)
+        .attr("height", 30)
         .attr('xlink:href', function (d) {
             if (d.country_code !== undefined) {
                 return "flags/flags/4x3/" + d.country_code + ".svg";
@@ -106,7 +106,7 @@ function draw_top_chart(element) {
 
     groups.append("text")
         .attr("dx", 43)
-        .attr("dy", 55)
+        .attr("dy", 25)
         .style('fill', 'black')
 
         .text(function (d) {
