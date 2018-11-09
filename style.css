@@ -106,3 +106,7 @@ h2{
 .prix{
     margin-left: 5rem;
 }
+
+.country_bar {
+    cursor: pointer;
+}
