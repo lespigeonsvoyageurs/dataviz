@@ -192,7 +192,9 @@ function draw_country_chart(element) {
     groups.append("text")
         .attr("dx", 43)
         .attr("dy", 25)
-        .style('fill', 'black')
+        .style('fill', function (d) {
+        return d.value.couleurtexte;
+    })
 
         .text(function (d) {
             return d.key;
@@ -221,7 +223,7 @@ $(function () {
                     "total": d3.sum(d, function (e) {
                         return e.logements_115 + e.logements_3150 + e.logements_1630 / 12;
 
-                    }), "couleur": d[0].Couleur, "countrycode": d[0].country_code
+                    }), "couleur": d[0].Couleur, "countrycode": d[0].country_code, "couleurtexte" : d[0].Couleur_texte,
                 }
             }).entries(data);
 
