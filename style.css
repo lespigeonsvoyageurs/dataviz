@@ -56,12 +56,6 @@ body {
     text-align: center;
 }
 
-
-IMG.displayed {
-    display: block;
-    margin-left: auto;
-    margin-right: auto }
-
 h1{
     font-family:"Open Sans Light";
     text-transform : uppercase;
@@ -72,43 +66,51 @@ h1{
     text-align: center;
 }
 .mon_btn{
-    background: rgba(1, 11, 15, 0.02);
-    border-radius: 6px;
-    text-align: center;
+    background: rgba(1, 11, 15, 0.61);
     font-family:"Open Sans Light";
-    text-transform : uppercase;
+    border:none;
+    padding:6px 0 6px 0;
+    border-radius:8px;
+    width:50px;
+    font:bold 13px Arial;
+    color:#fff;
 }
 
 .prix_btn{
-    background: rgba(1, 11, 15, 0.02);
-    border-radius: 6px;
-    text-align: center;
+    background: rgba(1, 11, 15, 0.61);
     font-family:"Open Sans Light";
-    text-transform : uppercase;
+    border:none;
+    padding:6px 0 6px 0;
+    border-radius:8px;
+    width:60px;
+    font:bold 13px Arial;
+    color:#fff;
 
 
 }
 
 .btn_reset{
-    background: rgba(1, 11, 15, 0.02);
-    border-radius: 6px;
-    text-align: center;
+    background: rgba(1, 11, 15, 0.61);
     font-family:"Open Sans Light";
-    text-transform : uppercase;
-
+    border:none;
+    padding:6px 0 6px 0;
+    border-radius:8px;
+    width:80px;
+    font:bold 13px Arial;
+    color:#fff;
 }
 .active, .mon_btn:hover {
-    background-color: rgba(3, 159, 204, 0.38);
+    background-color: rgb(160, 206, 217);
 }
 .active, .prix_btn:hover {
-    background-color: rgba(3, 159, 204, 0.38);
+    background-color: rgb(160, 206, 217);
 }
 .btn_reset:hover {
-    background-color: rgba(3, 159, 204, 0.38);
+    background-color: rgb(160, 206, 217);
 }
 
 .subtitle{
-    margin-left: 5rem;
+    margin-left: 3rem;
 
 }
 
@@ -158,21 +160,4 @@ h2{
     margin-bottom: 20px;
 
 }
-.navbar, .main-navigation ul.menu ul li a {
-    border-color: #d5d6d6;
-}
-.navbar, .navbar .main-navigation .sub-menu, .navbar .main-navigation .children {
-    background-color: rgba(247, 247, 247, 0);
-}
-@media (min-width: 64em){
-    .navbar {
-        border-bottom: 1px solid #efefef;
-        border-top: 1px solid #efefef;
-        border-color: #2b2b3d;
-        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.05);
-    }
-    .navbar {
-        position: relative;
-        border-bottom: 0;
-        border-top: 1px solid #efefef;
-    }}
+
