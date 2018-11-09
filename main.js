@@ -33,8 +33,8 @@ function draw_top_chart(element) {
         }
     });
 
-    console.log(data.filter(function(d){
-        return d.Pays==="France";
+    console.log(data.filter(function (d) {
+        return d.Pays === "France";
     }));
 
     fdata = fdata.sort(function (a, b) {
@@ -49,13 +49,13 @@ function draw_top_chart(element) {
         return d.Ville;
     })).padding(0.1);
 
-    g.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0,"  + height + " ")
-        /*.call(d3.axisBottom(x).ticks(5).tickFormat(function (d) {
-            return parseInt(d / 1000);
-        }).tickSizeInner([-height]));*/
-        //.call(d3.axisBottom(x).ticks(1));
+    //g.append("g")
+     //   .attr("class", "x axis")
+      //  .attr("transform", "translate(0," + height + ")")
+    /*.call(d3.axisBottom(x).ticks(5).tickFormat(function (d) {
+        return parseInt(d / 1000);
+    }).tickSizeInner([-height]));*/
+    //.call(d3.axisBottom(x).ticks(1));
 
     /*g.append("g")
         .attr("class", "y axis")
@@ -66,19 +66,19 @@ function draw_top_chart(element) {
         .enter().append("g")
         .attr("class", "gr")
         .attr("transform", function (d, i) {
-            return "translate(0," + 45*(i) + ")"
+            return "translate(0," + 45 * (i) + ")"
         });
 
-    groups.append("rect")
+    var bars = groups.append("rect")
         .attr("class", "bar")
         .attr("x", 0)
         .attr("height", 40)
         .attr("y", 0)
-        .attr("width", function (d) {
-            return x(d[property]);
-        })
         .attr("fill", function (d) {
             return d.Couleur;
+        })
+        .attr("width", function (d) {
+            return 0;
         })
         .on("mousemove", function (d) {
             tooltip
@@ -89,6 +89,12 @@ function draw_top_chart(element) {
         })
         .on("mouseout", function (d) {
             tooltip.style("display", "none");
+        });
+
+    bars.transition()
+        .duration(1000)
+        .attr("width", function (d) {
+            return x(d[property]);
         });
 
     groups.append("image")
@@ -193,8 +199,8 @@ function draw_country_chart(element) {
         .attr("dx", 43)
         .attr("dy", 25)
         .style('fill', function (d) {
-        return d.value.couleurtexte;
-    })
+            return d.value.couleurtexte;
+        })
 
         .text(function (d) {
             return d.key;
@@ -223,7 +229,7 @@ $(function () {
                     "total": d3.sum(d, function (e) {
                         return e.logements_115 + e.logements_3150 + e.logements_1630 / 12;
 
-                    }), "couleur": d[0].Couleur, "countrycode": d[0].country_code, "couleurtexte" : d[0].Couleur_texte,
+                    }), "couleur": d[0].Couleur, "countrycode": d[0].country_code, "couleurtexte": d[0].Couleur_texte,
                 }
             }).entries(data);
 
@@ -250,7 +256,7 @@ $(function () {
 
         });
 
-        $("#reset_country").click(function(){
+        $("#reset_country").click(function () {
             selected_country = "";
             draw_top_chart("chart");
         })
